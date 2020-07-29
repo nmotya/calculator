@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <style>
+            
+            @font-face {
+                font-family: "calculator";
+                src: url('Calculator.eot');
+                src: local('calculator'), 
+                local('Calculator'), 
+                url('Calculator.ttf') format('truetype'),
+                url('Calculator.svg#font') format('svg'); 
+            }
+            #container{
+                background-color: #09486B;
+                color:#CEF09E;
+                font-family: calculator, 'Times New Roman', Times, serif;
+                font-size: 500%;
+            }
+            #display{
+                align-self: center;
+                width: 100%;
+                height: 20%;
+                border: 2px solid #CEF09E;
+            }
+            .button{    
+                border: 2px solid #CEF09E;
+                border-radius: 25%;
+                width: 75%;
+                height: 80%;
+                align-self: center;
+                align-content: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #zero-button-top{
+                width: 75%;
+                height: 80%;
+                border-top: 2px solid #CEF09E;
+                border-left: 2px solid #CEF09E;
+                border-right: 2px solid #CEF09E;
+                border-top-left-radius: 25%;
+                border-top-right-radius: 25%;
+                align-self: center;
+            }
+            #zero-button-mid{
+                width: 75%;
+                height: 120%;
+                border-left: 2px solid #CEF09E;
+                border-right: 2px solid #CEF09E;
+                align-self: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #zero-button-bottom{
+                width: 75%;
+                height: 80%;
+                border-bottom: 2px solid #CEF09E;
+                border-left: 2px solid #CEF09E;
+                border-right: 2px solid #CEF09E;
+                border-bottom-left-radius: 25%;
+                border-bottom-right-radius: 25%;
+                align-self: center;
+            }
+            #button-container{
+                display: grid;
+                justify-items: center;
+                width: 100%;
+                height: 79%;
+                grid-template-columns: 16.67% 16.67% 16.67% 16.67% 16.67% 16.67%;
+                grid-template-rows: 33% 33% 33%;
+            }
+
+        </style>
+
+    </head>
+    <body id = "container">
+        <div id = "display">
+        </div>
+        <div id = "button-container">
+            <div class = "button">
+                1
+            </div>
+            <div class = "button">
+                2
+            </div>
+            <div class = "button">
+                3
+            </div>
+            <div id = "zero-button-top">
+            </div>
+            <div class = "button">
+                +
+            </div>
+            <div class = "button">
+                -
+            </div>
+            <div class = "button">
+                4
+            </div>
+            <div class = "button">
+                5
+            </div>
+            <div class = "button">
+                6
+            </div>
+            <div id = "zero-button-bottom">
+                0
+            </div>
+            <div class = "button">
+                X
+            </div>
+            <div class = "button">
+                ÷
+            </div>
+            <div class = "button">
+                7
+            </div>
+            <div class = "button">
+                8
+            </div>
+            <div class = "button">
+                9
+            </div>
+            <div class = "button">
+                .
+            </div>
+            <div class = "button">
+                AC
+            </div>
+            <div class = "button">
+                =
+            </div>
+
+        </div>
+    </body>
+</html>
