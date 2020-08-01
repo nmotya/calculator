@@ -1,8 +1,10 @@
+<!DOCTYPE html>
 <html>
     <head>
- 
         <style>
-            
+            html, body{
+                height: 98%;
+            }
             @font-face {
                 font-family: "calculator";
                 src: url('Calculator.eot');
@@ -112,8 +114,6 @@
 
     </head>
     <body id = "container">
-
-
         <div id = "display">
         </div>
 
@@ -135,7 +135,7 @@
             <button class = "button" onclick="addNumber(7)">7</button>
             <button class = "button" onclick="addNumber(8)">8</button>
             <button class = "button" onclick="addNumber(9)">9 </button>
-            <button class = "button">.</button>
+            <button class = "button" onclick="addDecimal()">.</button>
             <button class = "button" onclick="clearDisp()">AC</button>
             <button class = "button" onclick ="operate()">=</button>
            
@@ -160,39 +160,69 @@
             if (breakCounter > 0){
                clearDisp();
            }
-            if (counter ===0){
+            if (counter === 0 && totalInput.length < 20){
                 totalInput = totalInput + input;
                 hiddenInput = hiddenInput + input;
                 document.getElementById("display").innerHTML = totalInput;
-            } else {
-                if (hiddenInput.includes("+") || hiddenInput.includes("/") || hiddenInput.includes("X") || hiddenInput.includes("subt")){
-                    totalInput = totalInput + input;
-                    hiddenInput = hiddenInput + input;
-                    document.getElementById("display").innerHTML = totalInput;
-                }
+            } else if (counter === 0 &&totalInput.length >= 20){
+                totalInput = totalInput + input;
+                hiddenInput = hiddenInput + input;
+                document.getElementById("display").innerHTML = totalInput.substr(totalInput.length - 20, totalInput.length - 1);
+            } else if (counter === 0 && (hiddenInput.includes("+") || hiddenInput.includes("/") || hiddenInput.includes("X") || hiddenInput.includes("subt")) && totalInput.length < 20){
+                totalInput = totalInput + input;
+                hiddenInput = hiddenInput + input;
+                document.getElementById("display").innerHTML = totalInput;    
             }
         }
 
         function addOperator(input){
             let a = totalInput.slice(-1);
-           if (breakCounter > 0){
-               clearDisp();
-           }
-            if (input === "-"){
-                if (a === "" || a === " "){
-                    totalInput = totalInput + input;
-                    hiddenInput = hiddenInput + input;
-                    document.getElementById("display").innerHTML = totalInput;
-
-                } else if (a != " " && a != "-" && a != ""){
+            if (a != "."){
+                counter = 0;
+                if (breakCounter > 0){
+                clearDisp();
+                } 
+                if (input === "-" ){
+                    if (a === "" || a === " "){
+                        totalInput = totalInput + input;
+                        hiddenInput = hiddenInput + input;
+                        if (totalInput.length < 20){
+                            document.getElementById("display").innerHTML = totalInput;
+                        } else {
+                            document.getElementById("display").innerHTML = totalInput.substr(totalInput.length-20, totalInput.length-1);
+                        }
+                    } else if ( a != "-" ){
+                        totalInput = totalInput + " " + input + " ";
+                        hiddenInput = hiddenInput + " subt ";
+                        if (totalInput.length < 20){
+                            document.getElementById("display").innerHTML = totalInput;
+                        } else {
+                            document.getElementById("display").innerHTML = totalInput.substr(totalInput.length-20, totalInput.length-1);
+                        }
+                    }
+                } else if (a != " " && a != "-" && a != ""  && totalInput.length < 20){        
                     totalInput = totalInput + " " + input + " ";
-                    hiddenInput = hiddenInput + " subt ";
+                    hiddenInput = hiddenInput + " " + input + " ";
+                    document.getElementById("display").innerHTML = totalInput;
+                } else if (totalInput.length >= 20 && a != " " && a != "-" && a != "" ){
+                    totalInput = totalInput + " " + input + " ";
+                    hiddenInput = hiddenInput + " " + input + " ";
+                    document.getElementById("display").innerHTML = totalInput.substr(totalInput.length - 20, totalInput.length - 1);
+                }
+            }   
+        }
+        function addDecimal(){
+            let a = totalInput.split(" ");
+            if (!(a[a.length-1].includes("."))){
+                if (totalInput.length >= 20){
+                    totalInput = totalInput + ".";
+                    hiddenInput = hiddenInput + ".";
+                    document.getElementById("display").innerHTML = totalInput.substr(totalInput.length - 20, totalInput.length - 1);
+                } else{
+                    totalInput = totalInput + ".";
+                    hiddenInput = hiddenInput + ".";
                     document.getElementById("display").innerHTML = totalInput;
                 }
-            }else if (a != " " && a != "-" && a != ""){        
-                totalInput = totalInput + " " + input + " ";
-                hiddenInput = hiddenInput + " " + input + " ";
-                document.getElementById("display").innerHTML = totalInput;
             }
         }
         function add(first, second){
@@ -204,7 +234,7 @@
         function divide(first, second){
             if(second === "0"){
                 breakCounter = breakCounter + 1;
-                return "lmaooo u really thought"
+                return "lmaooo u thought"
             } else return Number(first) / Number(second);
         }
         function subtract(first, second){
@@ -246,8 +276,14 @@
                 }
                 totalInput = `${equation[0]}`;
                 hiddenInput = `${equation[0]}`;
-                document.getElementById("display").innerHTML = `${equation[0]}`;
-                counter = counter + 1;
+                if (equation[0].length > 20){
+                    document.getElementById("display").innerHTML = `${Number(equation[0]).toExponential()}`;
+                    counter = counter + 1;
+                } else {
+                    document.getElementById("display").innerHTML = `${equation[0]}`;
+                    counter = counter + 1;
+                }
+                
             }                      
         }
         </script>

@@ -1,1 +1,1 @@
-This is a simple online PEMDAS calculator that is built with HTML, CSS, and Javascript. 
+This is a simple online PEMDAS calculator that is built with HTML, CSS, and Javascript (no libraries were used). When the display's character limit is exceeded the calculator shows the last ~20 characters the user typed to allow them to see what they are typing during long operations.
